@@ -12,15 +12,28 @@ namespace RunningCat.LobbyScene
         [SerializeField] private Button gameStartButton;
         [SerializeField] private Button checkScoreButton;
         [SerializeField] private Button gameQuitButton;
+        [SerializeField] private GameObject checkScorePanel;
 
         private void Start()
         {
             gameStartButton.onClick.AddListener(OnClickGameStartButton);
+            checkScoreButton.onClick.AddListener(OnClickCheckScoreButton);
+            gameQuitButton.onClick.AddListener(OnClickGameQuitButton);
         }
 
         private void OnClickGameStartButton()
         {
             SceneManager.LoadScene("GameScene");
+        }
+
+        private void OnClickCheckScoreButton()
+        {
+            checkScorePanel.SetActive(true);
+        }
+
+        private void OnClickGameQuitButton()
+        {
+            Application.Quit();
         }
     }
 }
