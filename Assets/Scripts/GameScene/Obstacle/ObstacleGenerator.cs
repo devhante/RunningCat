@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class ObstacleGenerator : MonoBehaviour
 {
-    GameObject ObstaclePrefab;       // 함정 프리팹
+    GameObject ObstaclePrefab;                      // 함정 프리팹
 
-    [SerializeField] float spawnTime = 2f;            // 함정이 스폰되는 시간 간격
+    [SerializeField] float spawnTime = 2;           // 함정이 스폰되는 시간 간격
 
-    float flowedTime = 0f;                  // 시간이 지난 정도
+    float flowedTime = 0f;                          // 시간이 지난 정도
 
-    int selectType = -1;                    // 함정의 타입을 결정하는 변수
-    int Stage = 0;                          // 어느 스테이지인지에 대한 변수
+    int selectType = -1;                            // 함정의 타입을 결정하는 변수
+    int Stage = 0;                                  // 어느 스테이지인지에 대한 변수
 
     void Update()
     {
@@ -28,6 +28,7 @@ public class ObstacleGenerator : MonoBehaviour
 
             if (ObstaclePrefab) Instantiate(ObstaclePrefab, GameObject.Find("Obstacles").transform);                    // 프리팹이 로드 되었을 때만 생성
 
+            spawnTime = Random.Range(0.4f, 3);
             flowedTime = 0f;                                                                                            // 시간 초기화
         }
     }
