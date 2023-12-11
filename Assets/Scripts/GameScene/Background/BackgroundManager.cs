@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class BackgroundManager : MonoBehaviour
 {
-    [SerializeField] float backgroundSpeed = 20f;           // ¹è°æÀÌ Áö³ª°¡´Â ¼Óµµ
+    [SerializeField] float backgroundSpeed = 20f;           // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½
 
-    float ScreenHalfSize;                                   // °ÔÀÓÈ­¸éÀÇ ±æÀÌ Àý¹Ý
-    float deletePos;                                        // ¹è°æÀ» »ç¶óÁú À§Ä¡
-    float spawnPos;                                         // ¹è°æÀÌ ³ªÅ¸³¯ À§Ä¡
+    float ScreenHalfSize;                                   // ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    float deletePos;                                        // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
+    float spawnPos;                                         // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½Ä¡
 
-    int Stage = 0;                                          // ¾î´À ½ºÅ×ÀÌÁöÀÎÁö¿¡ ´ëÇÑ º¯¼ö
+    int Stage = 0;                                          // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     void Start()
     {
@@ -25,13 +25,13 @@ public class BackgroundManager : MonoBehaviour
 
     void Scrolling()
     {
-        transform.position += Vector3.left * backgroundSpeed * Time.deltaTime;       // ÀÌµ¿
+        transform.position += Vector3.left * backgroundSpeed * Time.deltaTime;       // ï¿½Ìµï¿½
 
-        if (transform.position.x < deletePos)                                        // ¹è°æÀÇ À§Ä¡°¡ »ç¶óÁú À§Ä¡¸¦ Áö³ª°¡¸é
+        if (transform.position.x < deletePos * 1.5f)                                        // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
-            transform.position = new Vector3(spawnPos, 0, 0);                        // ¹è°æÀ» spawnPos·Î ÀÌµ¿
+            transform.position = new Vector3(spawnPos * 2.18f, 0, 0);                        // ï¿½ï¿½ï¿½ï¿½ï¿½ spawnPosï¿½ï¿½ ï¿½Ìµï¿½
 
-            setPrefab();                                                             // ½ºÅ×ÀÌÁö¿¡ ¸ÂÃç¼­ ÇÁ¸®ÆÕ º¯°æ
+            setPrefab();                                                             // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ç¼­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
     }
 
@@ -40,10 +40,10 @@ public class BackgroundManager : MonoBehaviour
         switch (Stage)
         {
             case 0:
-                Resources.Load<GameObject>("Prefabs/Backgrounds/Background_s0");           // 1½ºÅ×ÀÌÁö ÇÁ¸®ÆÕ(½Ã°ñ)
+                Resources.Load<GameObject>("Prefabs/Backgrounds/Background_s0");           // 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½Ã°ï¿½)
                 break;
             case 1:
-                Resources.Load<GameObject>("Prefabs/Backgrounds/Background_s1");           // 2½ºÅ×ÀÌÁö ÇÁ¸®ÆÕ(µµ½Ã)
+                Resources.Load<GameObject>("Prefabs/Backgrounds/Background_s1");           // 2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
                 break;
         }
     }

@@ -129,7 +129,7 @@ namespace RunningCat.GameScene
         {
             if (hittable)
             {
-                MainCamera.Instance.Vibrate(0.2f, 0.3f);
+                MainCamera.Instance.Vibrate(0.05f, 0.3f);
                 // UIController.Instance.PlayHitEffect();
                 StartCoroutine(HitCoroutine());
                 dest.position = transform.position - step;
