@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace RunningCat.GameScene
@@ -24,16 +23,17 @@ namespace RunningCat.GameScene
             }
         }
         
-        [SerializeField] private float speed = 10;
-        [SerializeField] private float gravityScale = 6;
-        [SerializeField] private int jumpPower = 16;
-        [SerializeField] private bool hittable = true;
+        [SerializeField] private float speed;
+        [SerializeField] private float gravityScale;
+        [SerializeField] private int jumpPower;
+        [SerializeField] private bool hittable;
         [SerializeField] private PlayerStatus status = PlayerStatus.Running;
         [SerializeField] private Transform dest;
-        [SerializeField] private Vector3 step = new Vector3(0.5f, 0f, 0f);
+        [SerializeField] private Vector3 step;
         
         private Rigidbody2D rb2d;
         private Animator animator;
+        private float energyTime = 0f;
 
         private void Awake()
         {
@@ -78,10 +78,6 @@ namespace RunningCat.GameScene
             {
                 Eat();
             }
-            
-            
-            animator.SetBool("Jump", status == PlayerStatus.Jumping);
-            animator.SetBool("Crawl", status == PlayerStatus.Crawling);
 
             if (transform.position != dest.position)
             {
@@ -92,6 +88,15 @@ namespace RunningCat.GameScene
                 }
                 transform.Translate(new Vector3(value, 0f, 0f));
             }
+
+            if (energyTime > 0f)
+            {
+                energyTime -= Time.deltaTime;
+                if (energyTime <= 0f)
+                {
+                    animator.SetBool("Energy", false);
+                }
+            }
         }
 
         public void Jump()
@@ -99,6 +104,7 @@ namespace RunningCat.GameScene
             if (status != PlayerStatus.Jumping)
             {
                 status = PlayerStatus.Jumping;
+                animator.SetTrigger("Jump");
                 rb2d.gravityScale = gravityScale;
                 rb2d.velocity = Vector2.zero;
                 rb2d.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
@@ -110,7 +116,8 @@ namespace RunningCat.GameScene
             if (status != PlayerStatus.Crawling)
             {
                 status = PlayerStatus.Crawling;
-                rb2d.gravityScale = 100;
+                animator.SetTrigger("Crawl");
+                rb2d.gravityScale = 10;
                 rb2d.velocity = Vector2.zero;
             }
         }
@@ -120,6 +127,7 @@ namespace RunningCat.GameScene
             if (status == PlayerStatus.Crawling)
             {
                 status = PlayerStatus.Running;
+                animator.SetTrigger("Run");
                 rb2d.gravityScale = gravityScale;
                 rb2d.velocity = Vector2.zero;
             }
@@ -130,7 +138,6 @@ namespace RunningCat.GameScene
             if (hittable)
             {
                 MainCamera.Instance.Vibrate(0.05f, 0.3f);
-                // UIController.Instance.PlayHitEffect();
                 StartCoroutine(HitCoroutine());
                 dest.position = transform.position - step;
             }
@@ -138,6 +145,8 @@ namespace RunningCat.GameScene
 
         public void Eat()
         {
+            animator.SetBool("Energy", true);
+            energyTime = 10f;
             dest.position = transform.position + step;
         }
 
@@ -153,9 +162,22 @@ namespace RunningCat.GameScene
         
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (status == PlayerStatus.Jumping)
+            if (collision.collider.tag == "Ground")
             {
-                status = PlayerStatus.Running;
+                if (status == PlayerStatus.Jumping)
+                {
+                    status = PlayerStatus.Running;
+                    animator.SetTrigger("Run");
+                }
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.tag == "Obstacle")
+            {
+                Hit();
+                other.GetComponent<ObstacleMove>().isHit = true;
             }
         }
     }

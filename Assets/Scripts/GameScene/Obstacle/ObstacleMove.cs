@@ -2,13 +2,16 @@ using UnityEngine;
 
 public class ObstacleMove : MonoBehaviour
 {
-    [SerializeField] float obstacleSpeed = 20f;           // ÇÔÁ¤ÀÌ ÇÃ·¹ÀÌ¾î¿¡°Ô °¡´Â ¼Óµµ
-    [SerializeField] float destroyTime = 2f;              // »ý¼ºµÇ°í ³ª¼­ ÆÄ±«µÉ ½Ã°£
+    [HideInInspector] public bool isHit = false;
+    [HideInInspector] public bool isScored = false;
+    
+    [SerializeField] float obstacleSpeed = 20f;           // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½
+    [SerializeField] float destroyTime = 2f;              // ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä±ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
 
     void Update()
     {
-        transform.position += Vector3.left * obstacleSpeed * Time.deltaTime;        // ÀÌµ¿
+        transform.position += Vector3.left * obstacleSpeed * Time.deltaTime;        // ï¿½Ìµï¿½
 
-        Destroy(gameObject, destroyTime);                                           // ÆÄ±«
+        Destroy(gameObject, destroyTime);                                           // ï¿½Ä±ï¿½
     }
 }

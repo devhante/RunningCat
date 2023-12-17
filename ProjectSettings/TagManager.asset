@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Obstacle
+  - Train
+  - PlayerTail
   layers:
   - Default
   - TransparentFX
