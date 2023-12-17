@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class BackgroundManager : MonoBehaviour
 {
-    [SerializeField] float backgroundSpeed = 20f;           // ����� �������� �ӵ�
+    [SerializeField] float backgroundSpeed = 20f;           // background speed
 
-    float ScreenHalfSize;                                   // ����ȭ���� ���� ����
-    float deletePos;                                        // ����� ����� ��ġ
-    float spawnPos;                                         // ����� ��Ÿ�� ��ġ
+    float ScreenHalfSize;           // size of screen (half)
+    float deletePos;            // position of delete
+    float spawnPos;         // position of spawn
 
-    int Stage = 0;                                          // ��� �������������� ���� ����
+    int Stage = 0;          // number of stage
 
     void Start()
     {
@@ -25,13 +25,13 @@ public class BackgroundManager : MonoBehaviour
 
     void Scrolling()
     {
-        transform.position += Vector3.left * backgroundSpeed * Time.deltaTime;       // �̵�
+        transform.position += Vector3.left * backgroundSpeed * Time.deltaTime;          // moving background
 
-        if (transform.position.x < deletePos * 1.5f)                                        // ����� ��ġ�� ����� ��ġ�� ��������
+        if (transform.position.x < deletePos * 1.5f)            // until background position same delete position
         {
-            transform.position = new Vector3(spawnPos * 2.18f, 0, 0);                        // ����� spawnPos�� �̵�
+            transform.position = new Vector3(spawnPos * 2.18f, 0, 0);           // set background position
 
-            setPrefab();                                                             // ���������� ���缭 ������ ����
+            setPrefab();            // load background prefab
         }
     }
 
@@ -40,10 +40,10 @@ public class BackgroundManager : MonoBehaviour
         switch (Stage)
         {
             case 0:
-                Resources.Load<GameObject>("Prefabs/Backgrounds/Background_s0");           // 1�������� ������(�ð�)
+                Resources.Load<GameObject>("Prefabs/Backgrounds/Background_s0");            // if stage1, background_s0
                 break;
             case 1:
-                Resources.Load<GameObject>("Prefabs/Backgrounds/Background_s1");           // 2�������� ������(����)
+                Resources.Load<GameObject>("Prefabs/Backgrounds/Background_s1");            // if stage2, background_s1
                 break;
         }
     }

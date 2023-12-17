@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class ObstacleGenerator : MonoBehaviour
 {
-    GameObject ObstaclePrefab;                      // 함정 프리팹
+    GameObject ObstaclePrefab;
 
-    [SerializeField] float spawnTime = 2;           // 함정이 스폰되는 시간 간격
+    [Tooltip("함정들이 스폰되는 시간 간격")]
+    [SerializeField] float spawnTime = 2;
 
-    float flowedTime = 0f;                          // 시간이 지난 정도
+    float flowedTime = 0;
 
-    int selectType = -1;                            // 함정의 타입을 결정하는 변수
-    int Stage = 0;                                  // 어느 스테이지인지에 대한 변수
+    int selectType = -1;
+    int Stage = 0;
 
     void Update()
     {
@@ -22,14 +23,14 @@ public class ObstacleGenerator : MonoBehaviour
 
         if (flowedTime > spawnTime)
         {
-            selectType = (Stage == 0) ? Random.Range(0, 2) : Random.Range(2, 4);                                        // Stage에 맞는 랜덤 함정을 정하기
+            selectType = (Stage == 0) ? Random.Range(0, 2) : Random.Range(2, 4);            // set random obstacle which right stage
 
-            setPrefab();                                                                                                // selectType과 Stage에 맞게 프리팹 로드
+            setPrefab();            // load prefab which right stage
 
-            if (ObstaclePrefab) Instantiate(ObstaclePrefab, GameObject.Find("Obstacles").transform);                    // 프리팹이 로드 되었을 때만 생성
+            if (ObstaclePrefab) Instantiate(ObstaclePrefab, GameObject.Find("Obstacles").transform);            // if loaded prefab, create obstacle
 
-            spawnTime = Random.Range(0.4f, 3);
-            flowedTime = 0f;                                                                                            // 시간 초기화
+            spawnTime = Random.Range(0.4f, 3f);         // set random spawntime
+            flowedTime = 0f;
         }
     }
 
@@ -38,19 +39,19 @@ public class ObstacleGenerator : MonoBehaviour
         switch (selectType)
         {
             case 0:
-                ObstaclePrefab = Resources.Load<GameObject>("Prefabs/Obstacles/Wood");                // 나무
+                ObstaclePrefab = Resources.Load<GameObject>("Prefabs/Obstacles/Wood");                // tree
                 break;
 
             case 1:
-                ObstaclePrefab = Resources.Load<GameObject>("Prefabs/Obstacles/Bird");                // 새
+                ObstaclePrefab = Resources.Load<GameObject>("Prefabs/Obstacles/Crow");                // crow
                 break;
 
             case 2:
-                ObstaclePrefab = Resources.Load<GameObject>("Prefabs/Obstacles/Tack");                // 송곳
+                ObstaclePrefab = Resources.Load<GameObject>("Prefabs/Obstacles/Tack");                // tack
                 break;
 
             case 3:
-                ObstaclePrefab = Resources.Load<GameObject>("Prefabs/Obstacles/Missile");             // 미사일
+                ObstaclePrefab = Resources.Load<GameObject>("Prefabs/Obstacles/Missile");             // missile
                 break;
         }
     }

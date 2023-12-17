@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5513112610535230564}
   - component: {fileID: 6478830999053710076}
   - component: {fileID: 8803722738228803298}
+  - component: {fileID: 5664412734041461712}
   - component: {fileID: 2567170973294059452}
   m_Layer: 0
-  m_Name: Bird
+  m_Name: Crow
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,6 +113,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.23, y: 0.2}
   m_EdgeRadius: 0
+--- !u!95 &5664412734041461712
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643055925642669841}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b6a3d9111f722f44abb483b104f7d0ec, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &2567170973294059452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,5 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca49381db0e7cc4d84b6e5c8ec53ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHit: 0
+  isScored: 0
   obstacleSpeed: 1
   destroyTime: 4
