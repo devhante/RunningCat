@@ -1,3 +1,4 @@
+using RunningCat.GameScene;
 using UnityEngine;
 
 public class ObstacleGenerator : MonoBehaviour
@@ -14,7 +15,10 @@ public class ObstacleGenerator : MonoBehaviour
 
     void Update()
     {
-        Spawn();
+        if (!GameManager.instance.gameOver)
+        {
+            Spawn();
+        }
     }
 
     void Spawn()

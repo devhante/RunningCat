@@ -11,17 +11,9 @@ namespace RunningCat.GameScene
         Crawling
     }
     
-    public class Player : MonoBehaviour
+    public class Player : Singleton<Player>
     {
-        private static Player instance = null;
-
-        public static Player Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+        public float energyTime = 0f;
         
         [SerializeField] private float speed;
         [SerializeField] private float gravityScale;
@@ -33,17 +25,10 @@ namespace RunningCat.GameScene
         
         private Rigidbody2D rb2d;
         private Animator animator;
-        private float energyTime = 0f;
 
-        private void Awake()
+        protected override void Awake()
         {
-            if (instance)
-            {
-                Destroy(gameObject);
-                return;
-            }
-            instance = this;
-            
+            base.Awake();
             rb2d = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
         }
@@ -162,7 +147,7 @@ namespace RunningCat.GameScene
         
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.collider.tag == "Ground")
+            if (collision.collider.CompareTag("Ground"))
             {
                 if (status == PlayerStatus.Jumping)
                 {
@@ -174,11 +159,22 @@ namespace RunningCat.GameScene
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.tag == "Obstacle")
+            if (other.CompareTag("Obstacle"))
             {
                 Hit();
                 other.GetComponent<ObstacleMove>().isHit = true;
             }
+            else if (other.CompareTag("Churus"))
+            {
+                GameManager.instance.churu++;
+                Eat();
+                Destroy(other.gameObject);
+            }
+        }
+
+        public void Idle()
+        {
+            // animator.SetTrigger("Idle");
         }
     }
 }

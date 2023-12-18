@@ -1,4 +1,8 @@
+using System;
+using System.Collections;
+using RunningCat.GameScene;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ChuruMove : MonoBehaviour
 {
@@ -7,9 +11,9 @@ public class ChuruMove : MonoBehaviour
 
     Transform obstacleTransform;
 
-    [Tooltip("Ãò¸£ÀÇ ½ºÇÇµå")]
+    [Tooltip("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Çµï¿½")]
     [SerializeField] float churuSpeed = 1f;
-    [Tooltip("Ãò¸£ÀÌ ÆÄ±«µÇ´Â ½Ã°£ °£°Ý")]
+    [Tooltip("ï¿½ï¿½ï¿½ï¿½ ï¿½Ä±ï¿½ï¿½Ç´ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] float destroyTime = 4f;
 
     void Awake()
@@ -26,7 +30,7 @@ public class ChuruMove : MonoBehaviour
                 SetChuruPos();
         }
 
-        transform.position += Vector3.left * churuSpeed * Time.deltaTime;        // moving churu
+        transform.position += Vector3.left * (churuSpeed + GameManager.instance.speed) * Time.deltaTime;        // moving churu
 
         Destroy(gameObject, destroyTime);                                           // destory churu
     }

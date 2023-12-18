@@ -8,6 +8,7 @@ TagManager:
   - Obstacle
   - Train
   - PlayerTail
+  - Churus
   layers:
   - Default
   - TransparentFX

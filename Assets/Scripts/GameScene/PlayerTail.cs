@@ -3,13 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerTail : MonoBehaviour
+namespace RunningCat.GameScene
 {
-    private void OnTriggerEnter2D(Collider2D other)
+    public class PlayerTail : MonoBehaviour
     {
-        if (other.tag == "Train")
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log("Game Over");
+            if (other.CompareTag("Train"))
+            {
+                GameManager.instance.GameOver();
+            }
         }
     }
 }

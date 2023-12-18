@@ -2,19 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstacleChecker : MonoBehaviour
+namespace RunningCat.GameScene
 {
-    private void OnTriggerEnter2D(Collider2D other)
+    public class ObstacleChecker : MonoBehaviour
     {
-        if (other.tag == "Obstacle")
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            var om = other.GetComponent<ObstacleMove>();
-            if (!om.isScored)
+            if (other.CompareTag("Obstacle"))
             {
-                om.isScored = true;
-                if (om.isHit)
+                var om = other.GetComponent<ObstacleMove>();
+                if (!om.isScored)
                 {
-                    // Score 상승
+                    om.isScored = true;
+                    if (!om.isHit)
+                    {
+                        GameManager.instance.obstacle++;
+                        if (Player.instance.energyTime > 0)
+                        {
+                            GameManager.instance.score += 20;
+                        }
+                        else
+                        {
+                            GameManager.instance.score += 10;
+                        }
+                    }
                 }
             }
         }

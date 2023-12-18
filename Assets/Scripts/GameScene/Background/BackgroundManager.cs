@@ -1,4 +1,5 @@
-using UnityEditor.SceneManagement;
+using System.Collections;
+using RunningCat.GameScene;
 using UnityEngine;
 
 public class BackgroundManager : MonoBehaviour
@@ -20,12 +21,15 @@ public class BackgroundManager : MonoBehaviour
 
     void Update()
     {
-        Scrolling();
+        if (!GameManager.instance.gameOver)
+        {
+            Scrolling();
+        }
     }
 
     void Scrolling()
     {
-        transform.position += Vector3.left * backgroundSpeed * Time.deltaTime;          // moving background
+        transform.position += Vector3.left * (backgroundSpeed + GameManager.instance.speed) * Time.deltaTime;          // moving background
 
         if (transform.position.x < deletePos * 1.5f)            // until background position same delete position
         {

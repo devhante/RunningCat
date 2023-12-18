@@ -5,9 +5,9 @@ public class ChuruGenerator : MonoBehaviour
     GameObject ChuruPrefab;
 
     [Tooltip("츄르가 스폰되는 시간 간격")]
-    [SerializeField] float spawnTime = 2;
+    [SerializeField] float spawnTime = 20;
 
-    float flowedTime = 2;
+    float flowedTime = 0;
 
     void Awake()
     {
@@ -27,7 +27,7 @@ public class ChuruGenerator : MonoBehaviour
         {
             Instantiate(ChuruPrefab, GameObject.Find("Churus").transform);     // create Churu
 
-            spawnTime = Random.Range(0.4f, 3);          // set random spawntime
+            spawnTime = Random.Range(15, 25);          // set random spawntime
             flowedTime = 0;
         }
     }
